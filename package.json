@@ -1,0 +1,74 @@
+{
+  "name": "xepelin_challenge",
+  "version": "1.0.0",
+  "description": "Nodejs challenge for xepelin",
+  "scripts": {
+    "migrate:make": "knex --knexfile knexfile.ts -x ts migrate:make",
+    ":migrate:latest": "knex --knexfile knexfile.ts migrate:latest",
+    "docker:build": "sh ./scripts/build.sh",
+    "build": "tsc",
+    "start": "node ./dist/server/index.js",
+    "dev": "ts-node ./src/server/index.ts",
+    "test": "jest",
+    "coverage": "jest --coverage",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "format": "npx prettier --write .",
+    "prepare": "husky install",
+    "pre-commit": "npm run lint",
+    "pre-push": "npm test",
+    "post-merge": "npm install",
+    "post-rewrite": "npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/damiancipolat/RatherLabsChallege.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/damiancipolat/RatherLabsChallege/issues"
+  },
+  "homepage": "https://github.com/damiancipolat/RatherLabsChallege#readme",
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/jest": "^27.4.1",
+    "@types/node": "^17.0.23",
+    "@types/pino": "^7.0.5",
+    "@types/ws": "^8.5.3",
+    "@typescript-eslint/eslint-plugin": "^5.17.0",
+    "@typescript-eslint/parser": "^5.17.0",
+    "eslint": "^8.12.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.4",
+    "husky": "^7.0.4",
+    "jest": "^27.5.1",
+    "prettier": "^3.0.3",
+    "ts-jest": "^27.1.4",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.6.3",
+    "v": "^0.3.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.17.3",
+    "knex": "^3.0.1",
+    "mysql": "^2.18.1",
+    "npm": "^8.6.0",
+    "pino": "^7.9.2",
+    "pino-pretty": "^7.6.0",
+    "ts-node-register": "^1.0.0"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "./dist/"
+    ],
+    "collectCoverageFrom": [
+      "./src/**",
+      "!./src/api/middleware/*",
+      "!./src/api/routes/*"
+    ]
+  }
+}
