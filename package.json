@@ -3,8 +3,6 @@
   "version": "1.0.0",
   "description": "Nodejs challenge for xepelin",
   "scripts": {
-    "migrate:make": "knex --knexfile knexfile.ts -x ts migrate:make",
-    ":migrate:latest": "knex --knexfile knexfile.ts migrate:latest",
     "docker:build": "sh ./scripts/build.sh",
     "build": "tsc",
     "start": "node ./dist/server/index.js",
@@ -13,12 +11,7 @@
     "coverage": "jest --coverage",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
-    "format": "npx prettier --write .",
-    "prepare": "husky install",
-    "pre-commit": "npm run lint",
-    "pre-push": "npm test",
-    "post-merge": "npm install",
-    "post-rewrite": "npm install"
+    "format": "npx prettier --write ."
   },
   "repository": {
     "type": "git",
