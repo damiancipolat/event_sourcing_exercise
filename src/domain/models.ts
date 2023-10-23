@@ -2,7 +2,6 @@ interface Customer {
     name: string;
     surname: string;
     email: string;
-    idNumber: string;
 }
 
 interface Account {

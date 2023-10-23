@@ -4,6 +4,7 @@ module.exports.up = function (knex) {
     table.string('type').notNullable();
     table.string('version').notNullable();
     table.text('payload').notNullable();
+    table.text('created').notNullable();
   });
 };
 

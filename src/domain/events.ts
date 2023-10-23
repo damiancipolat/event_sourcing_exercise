@@ -5,26 +5,34 @@ import {
 
 type UUID = string;
 
-interface AccountCreated {
+interface AccountCreatedEvent {
     account: Account;
-    date: Date;
+    date: string;
     id: UUID;
 }
 
-interface WithdrawComplete {
+interface WithdrawCompleteEvent {
     transaction:Transaction;
-    date: Date;
+    date: string;
     id: UUID;
 }
 
-interface DepositComplete {
+interface DepositCompleteEvent {
     transaction:Transaction;
-    date: Date;
+    date: string;
     id: UUID;
+}
+interface Event{
+  id:string,
+  type:string;
+  version:string;
+  payload:string;
+  created:string;
 }
 
 export {
-  AccountCreated,
-  WithdrawComplete,
-  DepositComplete,
+  Event,
+  AccountCreatedEvent,
+  WithdrawCompleteEvent,
+  DepositCompleteEvent,
 };
