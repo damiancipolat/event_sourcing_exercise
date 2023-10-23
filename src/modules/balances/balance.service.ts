@@ -1,5 +1,5 @@
 import { Event } from '../../domain/events';
-import { searchEvent } from '../eventStore/event.service';
+import eventService from '../eventStore/event.service';
 
 const calc = (eventList:Event[]) => {
   let total = 0;
@@ -25,7 +25,7 @@ const calc = (eventList:Event[]) => {
 
 const getBalance = async (accountId:string):Promise<void> => {
   const typeList:string[] = ['withdrawComplete', 'depositComplete'];
-  const result = await searchEvent(typeList, `%"accountId":"${accountId}"%`);
+  const result = await eventService.search(typeList, `%"accountId":"${accountId}"%`);
   const final = calc(result);
   console.log('xxxx', final);
 };

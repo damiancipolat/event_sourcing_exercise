@@ -1,10 +1,10 @@
 module.exports.up = function (knex) {
   return knex.schema.createTable('events', (table) => {
-    table.increments('id').primary();
+    table.uuid('id').primary().notNullable();
     table.string('type').notNullable();
     table.string('version').notNullable();
     table.text('payload').notNullable();
-    table.text('created').notNullable();
+    table.dateTime('created').notNullable();
   });
 };
 

@@ -20,7 +20,7 @@ interface DepositCompleteEvent {
     id: UUID;
 }
 interface Event{
-  id:number,
+  id:string,
   type:string;
   version:string;
   payload:string;

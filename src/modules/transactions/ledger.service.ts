@@ -8,11 +8,11 @@ import {
   DepositCompleteEvent,
 } from '../../domain/events';
 
-import { publish } from '../eventStore/event.service';
+import eventService from '../eventStore/event.service';
 
 const parseToEvent = (type:string, newEvent:WithdrawCompleteEvent|DepositCompleteEvent):Event => {
   const event:Event = {
-    id: 0,
+    id: newEvent.id,
     type,
     version: '1.0',
     created: DateTime.now().toFormat('yyyy-MM-dd HH:mm:ss'),
@@ -28,7 +28,7 @@ const executeDeposit = async (operation:Transaction):Promise<Transaction> => {
     id: uuidv4(),
   };
 
-  await publish(parseToEvent('depositComplete', event));
+  await eventService.publish(parseToEvent('depositComplete', event));
   return operation;
 };
 
@@ -38,7 +38,7 @@ const executeWithdraw = async (operation:Transaction) => {
     id: uuidv4(),
   };
 
-  await publish(parseToEvent('withdrawComplete', event));
+  await eventService.publish(parseToEvent('withdrawComplete', event));
   return operation;
 };
 

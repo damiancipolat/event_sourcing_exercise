@@ -3,7 +3,7 @@ import { Event } from '../../domain/events';
 
 interface IEventRepository {
   save(event: Event): Promise<any>;
-  getById(id: number): Promise<Event | null>;
+  getById(id: string): Promise<Event | null>;
   searchEvent(typeList:string[], likeExp:string): Promise<Event[]>;
 }
 

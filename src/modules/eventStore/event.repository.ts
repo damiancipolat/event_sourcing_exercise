@@ -15,7 +15,7 @@ class EventRepository implements IEventRepository {
     return inserted;
   }
 
-  async getById(id: number): Promise<Event | null> {
+  async getById(id: string): Promise<Event | null> {
     const event: Event = await this.knexInstance('events').select('*').where({ id }).first();
     return event;
   }
@@ -25,7 +25,7 @@ class EventRepository implements IEventRepository {
       .select('*')
       .whereIn('type', typeList)
       .andWhere('payload', 'like', `${likeExp}`)
-      .orderBy('id', 'asc');
+      .orderBy('created', 'asc');
 
     return events;
   }
