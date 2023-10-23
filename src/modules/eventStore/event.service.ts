@@ -15,8 +15,8 @@ const publish = async (newEvent:Event):Promise<number> => {
   return newEvent.id;
 };
 
-const searchEvent = async (type:string, likeExp:string): Promise<Event[]> => {
-  const results = await eventStore.searchEvent(type, likeExp);
+const searchEvent = async (typeList:string[], likeExp:string): Promise<Event[]> => {
+  const results = await eventStore.searchEvent(typeList, likeExp);
   return results;
 };
 

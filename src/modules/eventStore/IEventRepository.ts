@@ -4,7 +4,7 @@ import { Event } from '../../domain/events';
 interface IEventRepository {
   save(event: Event): Promise<any>;
   getById(id: number): Promise<Event | null>;
-  searchEvent(type:string, likeExp:string): Promise<Event[]>;
+  searchEvent(typeList:string[], likeExp:string): Promise<Event[]>;
 }
 
 export default IEventRepository;

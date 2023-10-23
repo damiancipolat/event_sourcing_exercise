@@ -20,12 +20,13 @@ class EventRepository implements IEventRepository {
     return event;
   }
 
-  async searchEvent(type:string, likeExp:string): Promise<Event[]> {
+  async searchEvent(typeList:string[], likeExp:string): Promise<Event[]> {
     const events: Event[] = await this.knexInstance('events')
       .select('*')
-      .where({ type })
-      .andWhere('payload', 'like', `${likeExp}`);
-
+      .whereIn('type', typeList)
+      .andWhere('payload', 'like', `${likeExp}`)
+      .orderBy('id', 'asc');
+    console.log('111', typeList, likeExp);
     return events;
   }
 }
