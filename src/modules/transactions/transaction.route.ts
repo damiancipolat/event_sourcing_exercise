@@ -4,6 +4,6 @@ import validate from './transaction.guard';
 
 const router: Router = Router();
 
-router.post('/transaction', validate, transactionController);
+router.post('/', validate, transactionController);
 
 export = router;

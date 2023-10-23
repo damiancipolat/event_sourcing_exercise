@@ -1,5 +1,5 @@
-import uuid from 'uuid';
-
+import { v4 as uuidv4 } from 'uuid';
+import { DateTime } from 'luxon';
 import { Transaction } from '../../domain/models';
 
 import {
@@ -12,10 +12,10 @@ import { publish } from '../eventStore/event.service';
 
 const parseToEvent = (type:string, newEvent:WithdrawCompleteEvent|DepositCompleteEvent):Event => {
   const event:Event = {
-    id: newEvent.id,
+    id: 0,
     type,
     version: '1.0',
-    created: new Date().toISOString(),
+    created: DateTime.now().toFormat('yyyy-MM-dd HH:mm:ss'),
     payload: JSON.stringify(newEvent),
   };
 
@@ -25,8 +25,7 @@ const parseToEvent = (type:string, newEvent:WithdrawCompleteEvent|DepositComplet
 const executeDeposit = async (operation:Transaction):Promise<Transaction> => {
   const event:DepositCompleteEvent = {
     transaction: operation,
-    date: new Date().toISOString(),
-    id: uuid.v4(),
+    id: uuidv4(),
   };
 
   await publish(parseToEvent('depositComplete', event));
@@ -36,8 +35,7 @@ const executeDeposit = async (operation:Transaction):Promise<Transaction> => {
 const executeWithdraw = async (operation:Transaction) => {
   const event:DepositCompleteEvent = {
     transaction: operation,
-    date: new Date().toISOString(),
-    id: uuid.v4(),
+    id: uuidv4(),
   };
 
   await publish(parseToEvent('withdrawComplete', event));

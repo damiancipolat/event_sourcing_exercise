@@ -1,6 +1,6 @@
 module.exports.up = function (knex) {
   return knex.schema.createTable('events', (table) => {
-    table.uuid('id').primary().notNullable();
+    table.increments('id').primary();
     table.string('type').notNullable();
     table.string('version').notNullable();
     table.text('payload').notNullable();

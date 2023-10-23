@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { v4 as uuidv4 } from 'uuid';
 import { Account, Customer } from '../../domain/models';
 import { createAccount } from './account.service';
 
@@ -7,7 +8,6 @@ const create = async (req: Request, res: Response) => {
     name,
     surname,
     email,
-    accountId,
     accountNumber,
   } = req.body;
 
@@ -18,7 +18,7 @@ const create = async (req: Request, res: Response) => {
   };
 
   const account:Account = {
-    accountId,
+    accountId: uuidv4(),
     accountNumber,
     customer,
   };

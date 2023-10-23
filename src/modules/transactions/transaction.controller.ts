@@ -7,13 +7,13 @@ import {
 
 const depositController = async (req: Request, res: Response) => {
   const {
-    amount,
+    ammount,
     accountId,
   } = req.body;
 
   const operation:Transaction = {
     type: 'deposit',
-    amount,
+    ammount,
     accountId,
   };
 
@@ -23,13 +23,13 @@ const depositController = async (req: Request, res: Response) => {
 
 const withdrawController = async (req: Request, res: Response) => {
   const {
-    amount,
+    ammount,
     accountId,
   } = req.body;
 
   const operation:Transaction = {
     type: 'withdraw',
-    amount,
+    ammount,
     accountId,
   };
 

@@ -1,12 +1,13 @@
 import knex from 'knex';
+import knexConfig from '../../knex';
 import { Event } from '../../domain/events';
-import IEventRepository from './IeventRepository';
+import IEventRepository from './IEventRepository';
 
 class EventRepository implements IEventRepository {
   private knexInstance;
 
   constructor() {
-    this.knexInstance = knex;
+    this.knexInstance = knex(knexConfig);
   }
 
   async save(event: Event): Promise<any> {
@@ -14,7 +15,7 @@ class EventRepository implements IEventRepository {
     return inserted;
   }
 
-  async getById(id: string): Promise<Event | null> {
+  async getById(id: number): Promise<Event | null> {
     const event: Event = await this.knexInstance('events').select('*').where({ id }).first();
     return event;
   }

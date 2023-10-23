@@ -12,7 +12,7 @@ interface Account {
 
 interface Transaction {
     type: 'deposit' | 'withdraw';
-    amount: number;
+    ammount: number;
     accountId: string;
 }
 

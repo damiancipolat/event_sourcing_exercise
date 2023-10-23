@@ -3,7 +3,7 @@ import EventRepository from './event.repository';
 
 const eventStore = new EventRepository();
 
-const publish = async (newEvent:Event):Promise<string> => {
+const publish = async (newEvent:Event):Promise<number> => {
   // Check if the event exist to handle idempotency.
   const found:Event| null = await eventStore.getById(newEvent.id);
 

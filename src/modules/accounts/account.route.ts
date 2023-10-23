@@ -4,6 +4,6 @@ import validate from './account.guard';
 
 const router: Router = Router();
 
-router.post('/create', validate, accountController);
+router.post('/', validate, accountController);
 
 export = router;
