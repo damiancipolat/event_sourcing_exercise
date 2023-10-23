@@ -48,7 +48,7 @@ const transactionController = async (req: Request, res: Response):Promise<void> 
   }
 
   if (type === 'withdraw') {
-    await depositController(req, res);
+    await withdrawController(req, res);
     return;
   }
 
