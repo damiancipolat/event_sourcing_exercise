@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
 import { Account, Customer } from '../../domain/models';
-import { createAccount } from './account.service';
+import { createAccount, findAccount } from './account.service';
 import getBalance from '../balances/balance.service';
 
 const create = async (req: Request, res: Response) => {
@@ -23,6 +23,13 @@ const create = async (req: Request, res: Response) => {
     accountNumber,
     customer,
   };
+
+  const exists:Account|null = await findAccount(accountNumber);
+
+  if (exists) {
+    res.status(400).json({ message: 'Account exists, unable to crate.' });
+    return;
+  }
 
   const created = await createAccount(account);
   res.status(201).json(created);

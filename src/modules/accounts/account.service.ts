@@ -29,7 +29,19 @@ const createAccount = async (toCreate:Account):Promise<Account> => {
   return toCreate;
 };
 
+const findAccount = async (accountNumber:string):Promise<Account|null> => {
+  const accountFound:Event[] = await eventService.search(['accountCreated'], `%"accountNumber":"${accountNumber}"%`);
+
+  if (accountFound && accountFound.length > 0) {
+    const event:AccountCreatedEvent = JSON.parse(accountFound[accountFound.length - 1].payload);
+    return event.account;
+  }
+
+  return null;
+};
+
 export {
+  findAccount,
   createAccount,
   buildEvent,
   parseToEvent,
