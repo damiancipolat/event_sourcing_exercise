@@ -3,11 +3,12 @@ import { DateTime } from 'luxon';
 import { Account } from '../../domain/models';
 import { Event, AccountCreatedEvent } from '../../domain/events';
 import eventService from '../eventStore/event.service';
+import constants from './constants';
 
 const parseToEvent = (newEvent:AccountCreatedEvent):Event => {
   const event:Event = {
     id: newEvent.id,
-    type: 'accountCreated',
+    type: constants.ACCOUNT_CREATED,
     version: '1.0',
     created: DateTime.now().toFormat('yyyy-MM-dd HH:mm:ss'),
     payload: JSON.stringify(newEvent),

@@ -9,6 +9,7 @@ import {
 } from '../../domain/events';
 
 import eventService from '../eventStore/event.service';
+import constants from './constants';
 
 const parseToEvent = (type:string, newEvent:WithdrawCompleteEvent|DepositCompleteEvent):Event => {
   const event:Event = {
@@ -28,7 +29,7 @@ const executeDeposit = async (operation:Transaction):Promise<Transaction> => {
     id: uuidv4(),
   };
 
-  await eventService.publish(parseToEvent('depositComplete', event));
+  await eventService.publish(parseToEvent(constants.DEPOSIT_COMPLETE, event));
   return operation;
 };
 
@@ -38,7 +39,7 @@ const executeWithdraw = async (operation:Transaction) => {
     id: uuidv4(),
   };
 
-  await eventService.publish(parseToEvent('withdrawComplete', event));
+  await eventService.publish(parseToEvent(constants.WITHDRAW_COMPLETE, event));
   return operation;
 };
 
