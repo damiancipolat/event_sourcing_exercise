@@ -4,11 +4,11 @@ services:
   mysql:
     platform: linux/x86_64
     image: mysql:5.7
-    container_name: mysql_server
+    container_name: mysql_server_challenge
     environment:
       MYSQL_ROOT_PASSWORD: 123456
-      MYSQL_DATABASE: sass
-      MYSQL_USER: sass
+      MYSQL_DATABASE: xepelin
+      MYSQL_USER: xepelin
       MYSQL_PASSWORD: 1234
     volumes:
       - ./mysql_data:/var/lib/mysql
@@ -23,7 +23,7 @@ services:
   # phpMyAdmin
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin
+    container_name: phpmyadmin_challenge
     logging:
       driver: none
     environment:
@@ -39,12 +39,12 @@ services:
 
   # nodejs api
   api:
-    container_name: api
+    container_name: api_challenge
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - '3000:3000'
+      - '8000:8000'
     networks:
       - common-net
     restart: always
@@ -56,12 +56,9 @@ services:
     environment:
       DB_HOST: host.docker.internal
       DB_PORT: 3306
-      DB_USER: sass
+      DB_USER: xepelin
       DB_PWD: 1234
-      DB_NAME: sass
-      GPT_API_HOST_1: http://host.docker.internal:5001
-    volumes:
-      - ../images:/usr/app/images
+      DB_NAME: xepelin
 
 networks:
   common-net: {}
