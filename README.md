@@ -9,7 +9,7 @@ En este repositorio presento la solucióm al challenge de xepelin de backend.
 - [Stack](#stack)
 - [Configuration](#configuration)
 - [Commands](#commands)
-- [Architecture](#architecture)
+- [Architecture](#arquitectura)
 - [Endpoints](#endpoints)
 
 ## **Stack**:
