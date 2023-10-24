@@ -1,6 +1,6 @@
 <img src="https://github.com/damiancipolat/node-bff/blob/master/doc/node.png?raw=true" width="150px" align="right" />
 
-# Xepeling challenge
+# Xepelin challenge
 
 En este repositorio presento la solucióm al challenge de xepelin de backend.
 
