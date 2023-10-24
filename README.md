@@ -95,7 +95,7 @@ Aplique el concepto de polimorfismo en `src/modules/eventStore/event.repository.
 
 Para llevar acabo el diseño que elabore en AWS, puede realizarse con la siquiente arquitectura que se describe en este diagrama:
 
-<img src="https://github.com/damiancipolat/Xepelin_challenge/blob/main/doc/aws_diagram.png?raw=true" width="550px" />
+<img src="https://github.com/damiancipolat/Xepelin_challenge/blob/main/doc/aws_diagram.png?raw=true" width="650px" />
 
 ## **Endpoints**:
 
