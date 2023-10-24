@@ -11,7 +11,7 @@ services:
       MYSQL_USER: xepelin
       MYSQL_PASSWORD: 1234
     volumes:
-      - ./mysql_data:/var/lib/mysql
+      - mysql_data:/var/lib/mysql
     ports:
       - '3306:3306'
     networks:
