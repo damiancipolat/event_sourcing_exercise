@@ -52,7 +52,7 @@ const executeWithdraw = async (operation:Transaction) => {
   return operation;
 };
 
-export {
+export default {
   executeWithdraw,
   executeDeposit,
 };
