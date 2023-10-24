@@ -68,43 +68,27 @@ damian@challenge:~$ npm start
 damian@challenge:~$ docker compose up
 ```
 
-## **Architecture**:
+## **Arquitectura**:
 
-El proyecto consiste en un servicio que utiliza una BD MYSQL y expone
-una interfaz rest usando NODEJS.
+El proyecto se basa en un servicio que utiliza una base de datos MYSQL y expone una interfaz REST utilizando NODEJS.
 
-A nivel diseño se opto por un modelo modular en donde las caracteristicas
-principales del funcionamiento se encuentran dentro de modulos. Tambien
-se opto por usar como practica tomar elementos de DD para elaborar un dominio
-con objetos y eventos.
+En cuanto al diseño, opte por un enfoque modular en el que las características principales de funcionamiento se encuentran encapsuladas dentro de módulos. Además, hemos seguido la práctica de utilizar elementos de Diseño de Dominio para modelar el dominio con objetos y eventos.
 
-A nivel arquitectura, usamos el patron arquitectonico 'Event sourcing',
-en el cual todas las operaciones del sistema son consideradas como una secuencia de eventos. A nivel persistencia estos eventos son guardados en una bd sql, aqui es donde la consideramos nuestro event store, que sera importante
-para mantener toda el trackeo de los cambios de estado en cada evento.
+Desde una perspectiva arquitectónica, hemos adoptado el patrón de diseño 'Event Sourcing', en el cual todas las operaciones del sistema se consideran como una secuencia de eventos. Estos eventos se almacenan en una base de datos SQL que consideramos como nuestro "event store", lo que es esencial para llevar un seguimiento completo de los cambios de estado a lo largo de cada evento.
 
-En este patron a diferencia de otros no hay tablas con entidades,
-sino una unica tabla de eventos y de ahi se puede reconstruir el estado
-de la aplicacion con la secuencia de eventos de cada objeto.
+A diferencia de otros enfoques, en este patrón no se utilizan tablas con entidades separadas, sino que todo se registra en una única tabla de eventos, desde la cual podemos reconstruir el estado de la aplicación mediante la secuencia de eventos asociada a cada objeto.
 
-**Decisiones:**
-BD: usamos una bd sql debido a la practicidad en implementacion, en otros contextos una bs nosql tambien hubiera sido candidata.
+### Decidiones de diseño:
 
-Monolitico: decidi hacer un unico servicio ya que al ser un challenge
-no tenia relevancia implementar colas de entos para comunicacion asincronica,
-sino implementar el event sourcing.
+Base de datos: Opte por una base de datos SQL debido a su facilidad de implementación, aunque en otros contextos también habría sido válida una base de datos NoSQL.
 
-Patrones de diseño:
-Strategy: podemos observar un patron strategy en la clase,
-src/modules/balances/balance.service.ts y el modulo
-src/modules/balances/calcBalance.ts, ICalcBalance.ts
-el strategy esta en implementar el algoritmo implementando una interfaz de ts
-para que pueda ser intercambiable de ser necesario.
+Monolítico: Decidi implementar un único servicio, ya que, al tratarse de un desafío, no era necesario introducir colas de eventos para la comunicación asincrónica; nuestro enfoque se centró en la implementación del Event Sourcing.
 
-Polimorfismo:
-Aplicamos polimorfismo en
-src/modules/eventStore/event.repository.ts y IEvenRepository.ts
-aqui es para encapsular la capa de manejo de los eventos y en el caso
-de cambiar la implementacion de la bd mantener la interface.
+**Patrones de diseño**:
+Se uso el patrón de diseño "Strategy", que se puede observar en la clase `src/modules/balances/balance.service.ts` y el módulo `src/modules/balances/calcBalance.ts`, así como en `ICalcBalance.ts`. En estos casos, el patrón "Strategy" se utiliza para implementar algoritmos intercambiables a través de una interfaz TypeScript, permitiendo una flexibilidad en la elección del algoritmo a utilizar.
+
+**Polimorfismo:**
+Aplique el concepto de polimorfismo en `src/modules/eventStore/event.repository.ts` y `IEventRepository.ts`. Esta implementación permite encapsular la capa de gestión de eventos y facilita futuros cambios en la implementación de la base de datos sin afectar a la interfaz.
 
 ## **Endpoints**:
 
