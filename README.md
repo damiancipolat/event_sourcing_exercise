@@ -105,8 +105,9 @@ Esta es la documentación de la API que te permitirá interactuar con el sistema
 
 Descripción:
 Este endpoint te permite obtener el saldo de una cuenta específica utilizando su identificador único.
+GET /accounts/<id>/balance
 
-CURL
+CURL;
 
 ```console
 curl --location 'http://127.0.0.1:8000/accounts/52fd94e9-baca-46d7-a83a-5698ab84434b/balance'
@@ -116,6 +117,7 @@ curl --location 'http://127.0.0.1:8000/accounts/52fd94e9-baca-46d7-a83a-5698ab84
 
 Descripción:
 Crea una nueva cuenta proporcionando los datos necesarios, como nombre, apellido, correo electrónico y número de cuenta.
+POST /accounts
 
 CURL
 
@@ -134,6 +136,7 @@ curl --location 'http://127.0.0.1:8000/accounts' \
 
 Descripción:
 Esta solicitud permite realizar una retirada de fondos de una cuenta específica.
+POST /transactions
 
 CURL
 
@@ -151,6 +154,7 @@ curl --location 'http://127.0.0.1:8000/transactions' \
 
 Descripción
 Esta solicitud permite realizar un depósito de fondos en una cuenta específica.
+POST /transactions
 
 CURL
 
