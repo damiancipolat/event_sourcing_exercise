@@ -92,13 +92,9 @@ Here we see the component of every layers of the project.
 
 ## **Endpoints**:
 
-Aqui documento varios ejemplos de los endpoints solicitados en el enunciado.
-
-### Documentación de la API
-
 Esta es la documentación de la API que te permitirá interactuar con el sistema de cuentas y transacciones.
 
-#### Obtener el saldo de una cuenta
+##### Obtener el saldo de una cuenta
 
 Descripción:
 Este endpoint te permite obtener el saldo de una cuenta específica utilizando su identificador único.
@@ -109,7 +105,7 @@ CURL
 curl --location 'http://127.0.0.1:8000/accounts/52fd94e9-baca-46d7-a83a-5698ab84434b/balance'
 ```
 
-#### Crear una nueva cuenta
+##### Crear una nueva cuenta
 
 Descripción:
 Crea una nueva cuenta proporcionando los datos necesarios, como nombre, apellido, correo electrónico y número de cuenta.
@@ -127,7 +123,7 @@ curl --location 'http://127.0.0.1:8000/accounts' \
 }'
 ```
 
-#### Realizar una retirada (withdraw)
+##### Realizar una retirada (withdraw)
 
 Descripción:
 Esta solicitud permite realizar una retirada de fondos de una cuenta específica.
@@ -144,7 +140,7 @@ curl --location 'http://127.0.0.1:8000/transactions' \
 }'
 ```
 
-#### Realizar un depósito (deposit)
+##### Realizar un depósito (deposit)
 
 Descripción
 Esta solicitud permite realizar un depósito de fondos en una cuenta específica.
