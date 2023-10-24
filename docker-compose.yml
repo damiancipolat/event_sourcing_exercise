@@ -1,0 +1,71 @@
+version: '3'
+services:
+  # Servidor MySQL
+  mysql:
+    platform: linux/x86_64
+    image: mysql:5.7
+    container_name: mysql_server
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: sass
+      MYSQL_USER: sass
+      MYSQL_PASSWORD: 1234
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    ports:
+      - '3306:3306'
+    networks:
+      - common-net
+    restart: always
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
+
+  # phpMyAdmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    logging:
+      driver: none
+    environment:
+      - UPLOAD_LIMIT=90000000000
+      - PMA_HOST=mysql
+    ports:
+      - '8080:80'
+    depends_on:
+      - mysql
+    networks:
+      - common-net
+    restart: always
+
+  # nodejs api
+  api:
+    container_name: api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    networks:
+      - common-net
+    restart: always
+    depends_on:
+      mysql:
+        condition: service_healthy
+    links:
+      - mysql
+    environment:
+      DB_HOST: host.docker.internal
+      DB_PORT: 3306
+      DB_USER: sass
+      DB_PWD: 1234
+      DB_NAME: sass
+      GPT_API_HOST_1: http://host.docker.internal:5001
+    volumes:
+      - ../images:/usr/app/images
+
+networks:
+  common-net: {}
+
+volumes:
+  mysql_data:
+    driver: local

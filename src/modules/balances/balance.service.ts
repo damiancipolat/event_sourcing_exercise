@@ -1,33 +1,23 @@
+/* eslint-disable class-methods-use-this */
 import { Event } from '../../domain/events';
 import eventService from '../eventStore/event.service';
+import ICalcBalance from './ICalcBalance';
+import calculateBalance from './calcBalance';
 
-const calc = (eventList:Event[]) => {
-  let total = 0;
-  let account = '';
-  console.log('aaa', eventList);
-  eventList.forEach((event) => {
-    const { ammount, accountId } = JSON.parse(event.payload).transaction;
-    const { type } = event;
-    account = accountId;
-    if (type === 'depositComplete') {
-      total += ammount;
-    }
+class BalanceService {
+  private calculator:ICalcBalance = calculateBalance;
 
-    if (type === 'withdrawComplete' && total >= ammount) {
-      total -= ammount;
-    }
-  });
+  private async recoverTransactions(accountId:string):Promise<Event[]> {
+    const typeList:string[] = ['withdrawComplete', 'depositComplete'];
+    const result:Event[] = await eventService.search(typeList, `%"accountId":"${accountId}"%`);
+    return result;
+  }
 
-  return {
-    account, total,
-  };
-};
+  public async getBalance(accountId:string):Promise<number> {
+    const transactions:Event[] = await this.recoverTransactions(accountId);
+    const total:number = this.calculator(transactions);
+    return total;
+  }
+}
 
-const getBalance = async (accountId:string):Promise<void> => {
-  const typeList:string[] = ['withdrawComplete', 'depositComplete'];
-  const result = await eventService.search(typeList, `%"accountId":"${accountId}"%`);
-  const final = calc(result);
-  console.log('xxxx', final);
-};
-
-export default getBalance;
+export default BalanceService;

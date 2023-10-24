@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
 import { Account, Customer } from '../../domain/models';
 import { createAccount, findAccount } from './account.service';
-import getBalance from '../balances/balance.service';
+import BalanceService from '../balances/balance.service';
 
 const create = async (req: Request, res: Response) => {
   const {
@@ -35,13 +35,14 @@ const create = async (req: Request, res: Response) => {
   res.status(201).json(created);
 };
 
-const fetchBalance = async (req:Request, res:Response) => {
+const getBalance = async (req:Request, res:Response) => {
   const accountId = req.params.id;
-  await getBalance(accountId);
-  res.status(200).json({});
+  const balanceService = new BalanceService();
+  const total = await balanceService.getBalance(accountId);
+  res.status(200).json({ total });
 };
 
 export default {
   create,
-  fetchBalance,
+  getBalance,
 };

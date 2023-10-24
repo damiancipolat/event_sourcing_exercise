@@ -5,6 +5,6 @@ import validate from './account.guard';
 const router: Router = Router();
 
 router.post('/', validate, accountController.create);
-router.get('/:id/balance', accountController.fetchBalance);
+router.get('/:id/balance', accountController.getBalance);
 
 export = router;
