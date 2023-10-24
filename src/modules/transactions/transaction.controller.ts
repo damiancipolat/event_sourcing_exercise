@@ -6,35 +6,45 @@ import {
 } from './ledger.service';
 
 const depositController = async (req: Request, res: Response) => {
-  const {
-    ammount,
-    accountId,
-  } = req.body;
+  try {
+    const {
+      ammount,
+      accountId,
+    } = req.body;
 
-  const operation:Transaction = {
-    type: 'deposit',
-    ammount,
-    accountId,
-  };
+    const operation:Transaction = {
+      type: 'deposit',
+      ammount,
+      accountId,
+    };
 
-  const created = await executeDeposit(operation);
-  res.status(200).json(created);
+    const created = await executeDeposit(operation);
+    res.status(200).json(created);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({});
+  }
 };
 
 const withdrawController = async (req: Request, res: Response) => {
-  const {
-    ammount,
-    accountId,
-  } = req.body;
+  try {
+    const {
+      ammount,
+      accountId,
+    } = req.body;
 
-  const operation:Transaction = {
-    type: 'withdraw',
-    ammount,
-    accountId,
-  };
+    const operation:Transaction = {
+      type: 'withdraw',
+      ammount,
+      accountId,
+    };
 
-  const created = await executeWithdraw(operation);
-  res.status(200).json(created);
+    const created = await executeWithdraw(operation);
+    res.status(200).json(created);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({});
+  }
 };
 
 const transactionController = async (req: Request, res: Response):Promise<void> => {
@@ -42,17 +52,12 @@ const transactionController = async (req: Request, res: Response):Promise<void> 
     type,
   } = req.body;
 
-  if (type === 'deposit') {
-    await depositController(req, res);
-    return;
-  }
+  const controller:any = {
+    deposit: depositController,
+    withdraw: withdrawController,
+  };
 
-  if (type === 'withdraw') {
-    await withdrawController(req, res);
-    return;
-  }
-
-  res.status(400).json();
+  await controller[type](req, res);
 };
 
 export {

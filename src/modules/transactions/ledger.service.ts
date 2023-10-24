@@ -10,6 +10,9 @@ import {
 
 import eventService from '../eventStore/event.service';
 import constants from './constants';
+import BalanceService from '../balances/balance.service';
+
+const balanceServ = new BalanceService();
 
 const parseToEvent = (type:string, newEvent:WithdrawCompleteEvent|DepositCompleteEvent):Event => {
   const event:Event = {
@@ -34,6 +37,12 @@ const executeDeposit = async (operation:Transaction):Promise<Transaction> => {
 };
 
 const executeWithdraw = async (operation:Transaction) => {
+  const total:number = await balanceServ.getBalance(operation.accountId);
+
+  if (total < operation.ammount) {
+    throw new Error('The balance is not enough for the operation');
+  }
+
   const event:DepositCompleteEvent = {
     transaction: operation,
     id: uuidv4(),
