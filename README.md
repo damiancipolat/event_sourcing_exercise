@@ -70,6 +70,7 @@ damian@challenge:~$ docker compose up
 
 ## **Arquitectura**:
 
+**Introducción:**
 El proyecto se basa en un servicio que utiliza una base de datos MYSQL y expone una interfaz REST utilizando NODEJS.
 
 En cuanto al diseño, opte por un enfoque modular en el que las características principales de funcionamiento se encuentran encapsuladas dentro de módulos. Además, hemos seguido la práctica de utilizar elementos de Diseño de Dominio para modelar el dominio con objetos y eventos.
@@ -89,6 +90,12 @@ Se uso el patrón de diseño "Strategy", que se puede observar en la clase `src/
 
 **Polimorfismo:**
 Aplique el concepto de polimorfismo en `src/modules/eventStore/event.repository.ts` y `IEventRepository.ts`. Esta implementación permite encapsular la capa de gestión de eventos y facilita futuros cambios en la implementación de la base de datos sin afectar a la interfaz.
+
+### AWS:
+
+Para llevar acabo el diseño que elabore en AWS, puede realizarse con la siquiente arquitectura que se describe en este diagrama:
+
+<img src="https://github.com/damiancipolat/Xepelin_challenge/blob/main/doc/aws_diagram.png?raw=true" width="350px" />
 
 ## **Endpoints**:
 
