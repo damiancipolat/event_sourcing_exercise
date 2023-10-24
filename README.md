@@ -185,7 +185,6 @@ Se incluye tambie un phpmyadmin para simplificar el acceso a la bd.
 http://127.0.0.1:8080/
 user:xepelin
 pwd:1234
-}'
 ```
 
 Se incluye al ejecutar el comando para "dockerm compose up",
