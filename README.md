@@ -11,6 +11,7 @@ En este repositorio presento la solucióm al challenge de xepelin de backend.
 - [Commands](#commands)
 - [Architecture](#arquitectura)
 - [Endpoints](#endpoints)
+- [Docker](#docker)
 
 ## **Stack**:
 
@@ -167,3 +168,26 @@ curl --location 'http://127.0.0.1:8000/transactions' \
     "accountId":"52fd94e9-baca-46d7-a83a-5698ab84434b"
 }'
 ```
+
+## **Docker**:
+
+El proyecto esta completamente dockerizado para poder ejecutarse sin mayores problemas.
+
+Levantar proyecto (para mac):
+
+```console
+docker compose up
+}'
+```
+
+Se incluye tambie un phpmyadmin para simplificar el acceso a la bd.
+
+```console
+http://127.0.0.1:8080/
+user:xepelin
+pwd:1234
+}'
+```
+
+Se incluye al ejecutar el comando para "dockerm compose up",
+la ejecución de la migration que crea las tablas de la bd.

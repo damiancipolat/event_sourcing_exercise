@@ -1,15 +1,20 @@
 import { Request, Response, NextFunction } from 'express';
-import transactionSchema from './schema';
+import logger from '../utils/logger';
 
-const validate = (req: Request, res: Response, next:NextFunction):void => {
-  const { error } = transactionSchema.validate(req.body);
+const DEPOSIT_LIMIT = 10000;
 
-  if (error) {
-    res.status(400).json({ error: 'error in schema' });
-    return;
+const validateDeposit = (req: Request, res: Response, next:NextFunction):void => {
+  const {
+    type,
+    ammount,
+    accountId,
+  } = req.body;
+
+  if (type === 'deposit' && ammount >= DEPOSIT_LIMIT) {
+    logger.info({ accountId, ammount }, 'Deposit over warning value');
   }
 
   next();
 };
 
-export default validate;
+export default validateDeposit;
