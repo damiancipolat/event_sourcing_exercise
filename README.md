@@ -2,7 +2,7 @@
 
 # Xepelin challenge
 
-En este repositorio presento la solucióm al challenge de xepelin de backend.
+En este repositorio presento la solución al challenge de xepelin de backend.
 
 **Readme sections**
 
@@ -187,5 +187,5 @@ user:xepelin
 pwd:1234
 ```
 
-Se incluye al ejecutar el comando para "dockerm compose up",
+Se incluye al ejecutar el comando para "docker compose up",
 la ejecución de la migration que crea las tablas de la bd.
