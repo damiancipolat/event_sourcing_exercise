@@ -36,7 +36,7 @@ DB_NAME= xepelin
 
 ## **Commands**:
 
-These are several useful commands to run the project.
+Estos son algunos comandos utiles:
 
 - Run unit test:
 
@@ -70,25 +70,41 @@ damian@challenge:~$ docker compose up
 
 ## **Architecture**:
 
-The project is divided into several layers, each with different responsibilities. Three stand out **consumer** / **memory** / **api server**.
+El proyecto consiste en un servicio que utiliza una BD MYSQL y expone
+una interfaz rest usando NODEJS.
 
-- **Comsumer**: Get data from the socket and keep the book updated in memory, separated by buy and sell.
-- **Api**: HTTP interface to obtain the different features proposed.
-- **Memory (Store)**: In this layer we store the data obtained from the bitfinex provider through the websocket.
-- **Configuration**: Here I centralize the configuration from which the api or the consumer obtained information
-- **Utilis:** Cross functionality, only the logger is found.
+A nivel diseño se opto por un modelo modular en donde las caracteristicas
+principales del funcionamiento se encuentran dentro de modulos. Tambien
+se opto por usar como practica tomar elementos de DD para elaborar un dominio
+con objetos y eventos.
 
-#### **Layer diagrams**:
+A nivel arquitectura, usamos el patron arquitectonico 'Event sourcing',
+en el cual todas las operaciones del sistema son consideradas como una secuencia de eventos. A nivel persistencia estos eventos son guardados en una bd sql, aqui es donde la consideramos nuestro event store, que sera importante
+para mantener toda el trackeo de los cambios de estado en cada evento.
 
-Here we see the main layers of the project.
+En este patron a diferencia de otros no hay tablas con entidades,
+sino una unica tabla de eventos y de ahi se puede reconstruir el estado
+de la aplicacion con la secuencia de eventos de cada objeto.
 
-<img src="https://github.com/damiancipolat/RatherLabsChallege/blob/main/doc/layers.png?raw=true" width="250px" />
+**Decisiones:**
+BD: usamos una bd sql debido a la practicidad en implementacion, en otros contextos una bs nosql tambien hubiera sido candidata.
 
-#### **Component diagrams**:
+Monolitico: decidi hacer un unico servicio ya que al ser un challenge
+no tenia relevancia implementar colas de entos para comunicacion asincronica,
+sino implementar el event sourcing.
 
-Here we see the component of every layers of the project.
+Patrones de diseño:
+Strategy: podemos observar un patron strategy en la clase,
+src/modules/balances/balance.service.ts y el modulo
+src/modules/balances/calcBalance.ts, ICalcBalance.ts
+el strategy esta en implementar el algoritmo implementando una interfaz de ts
+para que pueda ser intercambiable de ser necesario.
 
-<img src="https://github.com/damiancipolat/RatherLabsChallege/blob/main/doc/complete.png?raw=true" width="550px" />
+Polimorfismo:
+Aplicamos polimorfismo en
+src/modules/eventStore/event.repository.ts y IEvenRepository.ts
+aqui es para encapsular la capa de manejo de los eventos y en el caso
+de cambiar la implementacion de la bd mantener la interface.
 
 ## **Endpoints**:
 
