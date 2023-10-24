@@ -177,7 +177,6 @@ Levantar proyecto (para mac):
 
 ```console
 docker compose up
-}'
 ```
 
 Se incluye tambie un phpmyadmin para simplificar el acceso a la bd.
