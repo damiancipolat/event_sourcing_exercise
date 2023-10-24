@@ -53,6 +53,7 @@ const executeWithdraw = async (operation:Transaction) => {
 };
 
 export default {
+  parseToEvent,
   executeWithdraw,
   executeDeposit,
 };
