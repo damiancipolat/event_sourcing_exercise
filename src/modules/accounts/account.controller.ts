@@ -35,7 +35,6 @@ const create = async (req: Request, res: Response) => {
     const created = await createAccount(account);
     res.status(201).json(created);
   } catch (error) {
-    console.log(error);
     res.status(500).json({});
   }
 };
@@ -47,7 +46,6 @@ const getBalance = async (req:Request, res:Response) => {
     const total = await balanceService.getBalance(accountId);
     res.status(200).json({ total });
   } catch (error) {
-    console.log(error);
     res.status(500).json({});
   }
 };
