@@ -4,6 +4,7 @@
   "description": "Nodejs challenge for xepelin",
   "scripts": {
     "docker:build": "sh ./scripts/build.sh",
+    "migrate": "knex migrate:latest",
     "build": "tsc",
     "start": "node ./dist/server/index.js",
     "dev": "ts-node ./src/server/index.ts",
