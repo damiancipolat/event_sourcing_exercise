@@ -2,7 +2,7 @@
 
 # Xepelin challenge
 
-En este repositorio presento la solución al challenge de xepelin de backend.
+En este repositorio se presenta la solucion a un ejercicio.
 
 **Readme sections**
 
