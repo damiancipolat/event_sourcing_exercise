@@ -183,7 +183,7 @@ Se incluye tambie un phpmyadmin para simplificar el acceso a la bd.
 
 ```console
 http://127.0.0.1:8080/
-user:xepelin
+user:test
 pwd:1234
 ```
 
