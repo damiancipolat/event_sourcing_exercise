@@ -1,6 +1,6 @@
 <img src="https://github.com/damiancipolat/node-bff/blob/master/doc/node.png?raw=true" width="150px" align="right" />
 
-# Xepelin challenge
+# Intro:
 
 En este repositorio se presenta la solucion a un ejercicio.
 
@@ -30,9 +30,9 @@ En este proyecto se usa el formato .env para la configuracion.
 PORT=8000
 DB_HOST= 127.0.0.1
 DB_PORT= 3306
-DB_USER= xepelin
+DB_USER= test
 DB_PWD= 1234
-DB_NAME= xepelin
+DB_NAME= test
 ```
 
 ## **Commands**:
